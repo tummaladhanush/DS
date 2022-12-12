@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self, data):
+       self.data = data
+       self.link = None
+ 
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+ 
+    def create(self, data):
+        if self.tail is None:
+            self.head = Node(data)
+            self.tail = self.head
+        else:
+            self.tail.link = Node(data)
+            self.tail = self.tail.link
+ 
+    def display(self):
+        cur = self.head
+        if cur==None:
+              print("Linked list is empty")
+        else:
+            while cur is not None:
+               print(cur.data, end = '-> ')
+               cur= cur.link
+
+    def insert_at_begin(self,data):
+        x=Node(data)
+        x.link=self.head
+        self.head=x
+        
+    def insert_at_end(self,data):
+        x=Node(data)
+        self.tail.link=x
+        self.tail=x
+        
+    def insert_at_pos(self,pos,data):
+        x=Node(data)
+        i=1
+        cur=self.head
+        while i<pos:
+            prev=cur
+            cur=cur.link
+            i+=1
+        prev.link=x
+        x.link=cur  
+    
+    def delete_at_begin(self):
+        cur=self.head
+        self.head=self.head.link
+        cur.link=None
+        print("deleted data", cur.data)
+    
+    def delete_at_end(self):
+        cur=self.head
+        while cur.link!=self.tail:
+            cur=cur.link
+        cur.link=None
+        print("deleted data", self.tail.data)
+        self.tail=cur
